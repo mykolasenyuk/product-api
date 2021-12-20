@@ -3,11 +3,11 @@ const { Conflict } = require('http-errors')
 
 const addProduct = async (req, res, next) => {
   try {
-    // const { name } = req.body
-    // const category = await Product.findOne({ name })
-    // if (category) {
-    //   throw new Conflict(`Product already exist`)
-    // }
+    const { name } = req.body
+    const category = await Product.findOne({ name })
+    if (category) {
+      throw new Conflict(`Product already exist`)
+    }
     console.log(req.body)
     const newProduct = { ...req.body }
     const result = await Product.create(newProduct)
