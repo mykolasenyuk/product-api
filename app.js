@@ -1,11 +1,12 @@
 const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
-//mongodb+srv://tecster:tecster2005@cluster0.xetew.mongodb.net/shop?retryWrites=true&w=majority
+
 // const contactsRouter = require('./routes/api/contacts')
 // const authRouter = require('./routes/api/auth')
 // const categoryRouter = require('./routes/api/categories')
 // const transactionRouter = require('./routes/api/transactions')
+const productsRouter = require('./routes/api/products')
 
 const app = express()
 
@@ -14,7 +15,7 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json())
-// app.use(express.static("public"));
+app.use('/api/products', productsRouter)
 
 // app.use("/api/contacts", contactsRouter);
 // app.use('/api/auth', authRouter)
