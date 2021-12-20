@@ -9,5 +9,6 @@ const productValidation = validation(joiSchema)
 router.get('/', ctrl.getAllProducts)
 router.post('/', productValidation, ctrl.addProduct)
 router.delete('/:productId', ctrl.dltProduct)
+router.put('/:productId', productValidation, ctrl.updProduct)
 
 module.exports = router

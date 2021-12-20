@@ -1,27 +1,33 @@
 const { Product } = require('../../models')
 
-const dltProduct = async (req, res, next) => {
+const updProduct = async (req, res, next) => {
   try {
     const { productId } = req.params
-
     const product = { productId }
-    console.log(product)
-    const result = await Product.findByIdAndDelete(product.productId)
+    const result = await Product.findByIdAndUpdate(
+      product.productId,
+      req.body,
+      {
+        new: true,
+      },
+    )
     if (!result) {
       res.status(404).json({
         status: 'error',
         code: 404,
-        message: `❌ Product with ID=${product.productId} not found`,
+        message: `Product with ID=${productId} not found`,
       })
       return
     }
     res.json({
       status: 'success',
       code: 200,
-      message: ' ✔️ Product deleted',
+      message: '✔️ Product updated',
+      data: { result },
     })
   } catch (error) {
     next(error)
   }
 }
-module.exports = dltProduct
+
+module.exports = updProduct
